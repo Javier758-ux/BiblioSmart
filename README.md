@@ -115,6 +115,7 @@ erDiagram
         BIGINT id_editorial FK
         VARCHAR titulo
         VARCHAR categoria
+        VARCHAR autor
         INT anio_publicacion
     }
     PRESTAMO {
