@@ -66,3 +66,78 @@ Clase 01: comprensión del problema, actores, alcance, exclusiones, lenguaje ini
 ## 9. Regla de trabajo
 
 Cada cambio importante debe ser comprensible, trazable y defendible. El repositorio es la fuente de verdad del proyecto.
+## 10. Diagrama ER
+```mermaid
+erDiagram
+    ROL ||--o{ USUARIO : "tiene"
+    USUARIO ||--o| LECTOR : "es"
+    LECTOR ||--o{ MULTA : "recibe"
+    LECTOR ||--o{ PRESTAMO : "solicita"
+    LECTOR ||--o{ RESERVA : "hace"
+    EDITORIAL ||--o{ LIBRO : "publica"
+    LIBRO ||--o{ PRESTAMO : "es prestado"
+    LIBRO ||--o{ RESERVA : "es reservado"
+    PRESTAMO ||--o{ RENOVACION : "tiene"
+
+    ROL {
+        BIGINT id_rol PK
+        VARCHAR nombre_rol
+        TEXT descripcion
+    }
+    USUARIO {
+        BIGINT id_usuario PK
+        BIGINT id_rol FK
+        VARCHAR nombre_completo
+        VARCHAR credenciales
+        VARCHAR estado
+    }
+    LECTOR {
+        BIGINT id_lector PK
+        BIGINT id_usuario FK
+        VARCHAR nro_lector
+        VARCHAR datos_contacto
+        DATE fecha_registro
+    }
+    MULTA {
+        BIGINT id_sancion PK
+        BIGINT id_lector FK
+        DATE fecha_inicio
+        DATE fecha_final
+        VARCHAR motivo
+        VARCHAR estado
+    }
+    EDITORIAL {
+        BIGINT id_editorial PK
+        VARCHAR nombre
+    }
+    LIBRO {
+        BIGINT id_libro PK
+        BIGINT id_editorial FK
+        VARCHAR titulo
+        VARCHAR categoria
+        INT anio_publicacion
+    }
+    PRESTAMO {
+        BIGINT id_prestamo PK
+        BIGINT id_lector FK
+        BIGINT id_libro FK
+        DATE fecha_salida
+        DATE fecha_prevista_devolucion
+        DATE fecha_devolucion_real
+        VARCHAR estado
+    }
+    RENOVACION {
+        BIGINT id_renovacion PK
+        BIGINT id_prestamo FK
+        DATE fecha_renovacion
+        DATE nueva_fecha_prevista
+    }
+    RESERVA {
+        BIGINT id_reserva PK
+        BIGINT id_lector FK
+        BIGINT id_libro FK
+        DATE fecha_reserva
+        DATE fecha_limite_retiro
+        VARCHAR estado
+    }
+```
