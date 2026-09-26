@@ -142,3 +142,6 @@ erDiagram
         VARCHAR estado
     }
 ```
+## 11. Documentación Técnica
+Toda la arquitectura del sistema, el modelo entidad-relación y la especificación de la API REST se encuentran documentados en nuestro espacio de trabajo:
+[Ver Documentación Oficial en Notion] https://showy-strand-271.notion.site/BiblioSmart-Documentaci-n-del-Proyecto-3e761b4f4d07802483fbcccf3aacf47d?pvs=143
