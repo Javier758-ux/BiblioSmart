@@ -70,20 +70,30 @@ Cada cambio importante debe ser comprensible, trazable y defendible. El reposito
 ```mermaid
 erDiagram
     ROL ||--o{ USUARIO : "tiene"
-    USUARIO ||--o| LECTOR : "es"
-    LECTOR ||--o{ MULTA : "recibe"
-    LECTOR ||--o{ PRESTAMO : "solicita"
-    LECTOR ||--o{ RESERVA : "hace"
+    USUARIO ||--o| LECTOR : "es un"
+    
+    AUTOR ||--o{ LIBRO_AUTOR : "escribe"
+    LIBRO ||--o{ LIBRO_AUTOR : "tiene"
+    
     EDITORIAL ||--o{ LIBRO : "publica"
-    LIBRO ||--o{ PRESTAMO : "es prestado"
+    
+    LIBRO ||--o{ EJEMPLAR : "posee"
+    
+    LECTOR ||--o{ SANCION : "recibe"
+    LECTOR ||--o{ RESERVA : "realiza"
+    LECTOR ||--o{ PRESTAMO : "solicita"
+    
+    EJEMPLAR ||--o{ PRESTAMO : "es prestado"
     LIBRO ||--o{ RESERVA : "es reservado"
-    PRESTAMO ||--o{ RENOVACION : "tiene"
+    
+    PRESTAMO ||--o{ RENOVACION : "permite"
 
     ROL {
         BIGINT id_rol PK
         VARCHAR nombre_rol
         TEXT descripcion
     }
+
     USUARIO {
         BIGINT id_usuario PK
         BIGINT id_rol FK
@@ -91,6 +101,7 @@ erDiagram
         VARCHAR credenciales
         VARCHAR estado
     }
+
     LECTOR {
         BIGINT id_lector PK
         BIGINT id_usuario FK
@@ -98,41 +109,55 @@ erDiagram
         VARCHAR datos_contacto
         DATE fecha_registro
     }
-    MULTA {
-        BIGINT id_sancion PK
-        BIGINT id_lector FK
-        DATE fecha_inicio
-        DATE fecha_final
-        VARCHAR motivo
-        VARCHAR estado
+
+    AUTOR {
+        BIGINT id_autor PK
+        VARCHAR nombre
+        VARCHAR nacionalidad
     }
+
     EDITORIAL {
         BIGINT id_editorial PK
         VARCHAR nombre
     }
+
     LIBRO {
         BIGINT id_libro PK
         BIGINT id_editorial FK
         VARCHAR titulo
         VARCHAR categoria
-        VARCHAR autor
-        INT anio_publicacion
+        INTEGER anio_publicacion
     }
+
+    LIBRO_AUTOR {
+        BIGINT id_libro FK
+        BIGINT id_autor FK
+    }
+
+    EJEMPLAR {
+        BIGINT id_ejemplar PK
+        BIGINT id_libro FK
+        VARCHAR codigo_barras
+        VARCHAR estado
+    }
+
     PRESTAMO {
         BIGINT id_prestamo PK
         BIGINT id_lector FK
-        BIGINT id_libro FK
+        BIGINT id_ejemplar FK
         DATE fecha_salida
         DATE fecha_prevista_devolucion
         DATE fecha_devolucion_real
         VARCHAR estado
     }
+
     RENOVACION {
         BIGINT id_renovacion PK
         BIGINT id_prestamo FK
         DATE fecha_renovacion
         DATE nueva_fecha_prevista
     }
+
     RESERVA {
         BIGINT id_reserva PK
         BIGINT id_lector FK
@@ -140,6 +165,24 @@ erDiagram
         DATE fecha_reserva
         DATE fecha_limite_retiro
         VARCHAR estado
+    }
+
+    SANCION {
+        BIGINT id_sancion PK
+        BIGINT id_lector FK
+        DATE fecha_inicio
+        DATE fecha_final
+        VARCHAR motivo
+        VARCHAR estado
+    }
+
+    AUDITORIA {
+        BIGINT id_auditoria PK
+        VARCHAR entidad_afectada
+        BIGINT id_registro
+        VARCHAR accion
+        TIMESTAMP fecha_hora
+        VARCHAR usuario_responsable
     }
 ```
 ## 11. Documentación Técnica
