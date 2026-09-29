@@ -1,5 +1,5 @@
 # BiblioSmart
-x
+
 Sistema académico full-stack para la gestión de catálogo bibliográfico, ejemplares físicos, préstamos, devoluciones, reservas, renovaciones y sanciones operativas de una biblioteca académica.
 
 ## 1. Problema
