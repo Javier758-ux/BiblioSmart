@@ -4,11 +4,11 @@
 
 ## 1. Problema
 
-Una biblioteca académica desea digitalizar su catálogo, ejemplares físicos, usuarios, préstamos, devoluciones, reservas y sanciones operativas. Actualmente se confunden los títulos bibliográficos con los ejemplares físicos y no existe trazabilidad fiable de quién tiene cada copia.
+- Una biblioteca académica desea digitalizar su catálogo, ejemplares físicos, usuarios, préstamos, devoluciones, reservas y sanciones operativas. Actualmente se confunden los títulos bibliográficos con los ejemplares físicos y no existe trazabilidad fiable de quién tiene cada copia.
 
 ## 2. Objetivo del MVP
 
-Construir un sistema web y móvil que gestione el catálogo bibliográfico y los ejemplares de forma individual, controle disponibilidad, préstamos, renovaciones y reservas, y entregue a cada usuario una vista clara de su situación.
+- Construir un sistema web y móvil que gestione el catálogo bibliográfico y los ejemplares de forma individual, controle disponibilidad, préstamos, renovaciones y reservas, y entregue a cada usuario una vista clara de su situación.
 
 ## 3. Actores principales
 
