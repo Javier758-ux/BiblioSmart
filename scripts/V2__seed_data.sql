@@ -1,54 +1,75 @@
--- ===================================================
--- SCRIPT DE CARGA INICIAL DE DATOS ACTUALIZADO
--- ===================================================
+-- =====================================================
+-- V2 - DATOS SEMILLA BIBLIOSMART
+-- =====================================================
 
--- ROLES
+
+-- =====================================================
+-- 1. ROLES
+-- =====================================================
+
 INSERT INTO rol (nombre_rol, descripcion)
-SELECT 'LECTOR', 'Usuario lector de la biblioteca'
-    WHERE NOT EXISTS (
+SELECT
+    'LECTOR',
+    'Usuario lector de la biblioteca'
+WHERE NOT EXISTS (
     SELECT 1
     FROM rol
     WHERE nombre_rol = 'LECTOR'
 );
 
 INSERT INTO rol (nombre_rol, descripcion)
-SELECT 'BIBLIOTECARIO', 'Gestiona préstamos, devoluciones y reservas'
-    WHERE NOT EXISTS (
+SELECT
+    'BIBLIOTECARIO',
+    'Gestiona préstamos, devoluciones y reservas'
+WHERE NOT EXISTS (
     SELECT 1
     FROM rol
     WHERE nombre_rol = 'BIBLIOTECARIO'
 );
 
 INSERT INTO rol (nombre_rol, descripcion)
-SELECT 'ADMINISTRADOR', 'Administra el sistema'
-    WHERE NOT EXISTS (
+SELECT
+    'ADMINISTRADOR',
+    'Administra el sistema'
+WHERE NOT EXISTS (
     SELECT 1
     FROM rol
     WHERE nombre_rol = 'ADMINISTRADOR'
 );
 
 
--- EDITORIAL
+-- =====================================================
+-- 2. EDITORIAL
+-- =====================================================
+
 INSERT INTO editorial (nombre)
-SELECT 'Editorial Demo'
-    WHERE NOT EXISTS (
+SELECT
+    'Editorial Demo'
+WHERE NOT EXISTS (
     SELECT 1
     FROM editorial
     WHERE nombre = 'Editorial Demo'
 );
 
 
--- AUTOR
+-- =====================================================
+-- 3. AUTOR
+-- =====================================================
+
 INSERT INTO autor (nombre)
-SELECT 'Autor Demo'
-    WHERE NOT EXISTS (
+SELECT
+    'Autor Demo'
+WHERE NOT EXISTS (
     SELECT 1
     FROM autor
     WHERE nombre = 'Autor Demo'
 );
 
 
--- LIBRO
+-- =====================================================
+-- 4. LIBRO
+-- =====================================================
+
 INSERT INTO libro (
     titulo,
     isbn,
@@ -65,13 +86,16 @@ SELECT
 FROM editorial e
 WHERE e.nombre = 'Editorial Demo'
   AND NOT EXISTS (
-    SELECT 1
-    FROM libro
-    WHERE isbn = '9780000000001'
-);
+      SELECT 1
+      FROM libro
+      WHERE isbn = '9780000000001'
+  );
 
 
--- RELACION LIBRO - AUTOR
+-- =====================================================
+-- 5. RELACION LIBRO - AUTOR
+-- =====================================================
+
 INSERT INTO libro_autor (
     id_libro,
     id_autor
@@ -80,18 +104,21 @@ SELECT
     l.id_libro,
     a.id_autor
 FROM libro l
-         CROSS JOIN autor a
+CROSS JOIN autor a
 WHERE l.isbn = '9780000000001'
   AND a.nombre = 'Autor Demo'
   AND NOT EXISTS (
-    SELECT 1
-    FROM libro_autor la
-    WHERE la.id_libro = l.id_libro
-      AND la.id_autor = a.id_autor
-);
+      SELECT 1
+      FROM libro_autor la
+      WHERE la.id_libro = l.id_libro
+        AND la.id_autor = a.id_autor
+  );
 
 
--- EJEMPLAR
+-- =====================================================
+-- 6. EJEMPLAR
+-- =====================================================
+
 INSERT INTO ejemplar (
     codigo,
     estado,
@@ -104,7 +131,7 @@ SELECT
 FROM libro l
 WHERE l.isbn = '9780000000001'
   AND NOT EXISTS (
-    SELECT 1
-    FROM ejemplar
-    WHERE codigo = 'DEMO-001'
-);
+      SELECT 1
+      FROM ejemplar
+      WHERE codigo = 'DEMO-001'
+  );
